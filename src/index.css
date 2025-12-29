@@ -1,0 +1,92 @@
+:root {
+  /* Health Theme Colors */
+  --primary-color: #2E7D32; /* Health Green */
+  --primary-light: #4CAF50;
+  --primary-dark: #1B5E20;
+  --secondary-color: #0288D1; /* Calm Blue */
+  --secondary-light: #03A9F4;
+  --bg-color: #F5F9F6; /* Very light green tint */
+  --card-bg: #FFFFFF;
+  --text-main: #212121;
+  --text-secondary: #757575;
+  --accent-blue: #E1F5FE;
+  --accent-green: #E8F5E9;
+  --danger: #D32F2F;
+  --warning: #FFA000;
+
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light;
+  color: var(--text-main);
+  background-color: var(--bg-color);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  justify-content: center; /* Center app on large screens */
+  background-color: #f0f2f5; /* Outer background for desktop view */
+}
+
+/* Mobile App Container Simulation */
+#root {
+  width: 100%;
+  max-width: 480px; /* Mobile max width */
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  position: relative;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  transition: border-color 0.25s, transform 0.1s;
+}
+
+button:hover {
+  background-color: var(--primary-dark);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+h1, h2, h3, h4 {
+  color: var(--primary-dark);
+}
+
+a {
+  font-weight: 500;
+  color: var(--secondary-color);
+  text-decoration: inherit;
+}
+a:hover {
+  color: var(--secondary-light);
+}
