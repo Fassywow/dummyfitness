@@ -28,10 +28,10 @@ Keep your answers positive, encouraging, and concise.
 export const sendMessageToAI = async (message: string): Promise<string> => {
     try {
         console.log("API Key:", API_KEY ? `${API_KEY.substring(0, 15)}...` : "MISSING");
-        console.log("Trying model: gemini-1.5-flash");
+        console.log("Trying model: gemini-flash-latest");
 
         const model = genAI.getGenerativeModel({
-            model: "gemini-1.5-flash"
+            model: "gemini-flash-latest"
         });
 
         const result = await model.generateContent([
