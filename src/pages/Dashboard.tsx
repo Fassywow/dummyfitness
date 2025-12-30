@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { getUserProfile, getTodayData, type UserProfile, type HealthData } from '../services/storageService';
 import { calculateBMI, getBMICategory, calculateWaterGoal } from '../services/healthService';
 import HealthCard from '../components/HealthCard';
-import { Footprints, Droplets, Moon, Flame } from 'lucide-react';
+import { Footprints, Droplets, Moon, Flame, Clock, BarChart2, Info } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Dashboard: React.FC = () => {
     const navigate = useNavigate();
     const [profile, setProfile] = useState<UserProfile | null>(null);
     const [todayData, setTodayData] = useState<HealthData | null>(null);
+    const [showBmiInfo, setShowBmiInfo] = useState(false);
 
     useEffect(() => {
         const loadDashboard = async () => {
@@ -64,7 +65,41 @@ const Dashboard: React.FC = () => {
             >
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <div>
-                        <h3 style={{ margin: 0, fontSize: '1rem', opacity: 0.9, color: 'white' }}>BMI Score</h3>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <h3 style={{ margin: 0, fontSize: '1rem', opacity: 0.9, color: 'white' }}>BMI Score</h3>
+                            <div
+                                onMouseEnter={() => setShowBmiInfo(true)}
+                                onMouseLeave={() => setShowBmiInfo(false)}
+                                style={{ cursor: 'pointer', position: 'relative', display: 'flex', alignItems: 'center' }}
+                            >
+                                <Info size={16} color="white" style={{ opacity: 0.8 }} />
+                                {showBmiInfo && (
+                                    <div style={{
+                                        position: 'absolute',
+                                        top: '100%',
+                                        left: '0',
+                                        width: '200px',
+                                        background: 'rgba(0,0,0,0.8)',
+                                        backdropFilter: 'blur(5px)',
+                                        padding: '10px',
+                                        borderRadius: '8px',
+                                        boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+                                        zIndex: 10,
+                                        fontSize: '0.8rem',
+                                        color: 'white',
+                                        lineHeight: '1.4',
+                                        marginTop: '5px'
+                                    }}>
+                                        BMI is a screening tool used to estimate body fat.
+                                        <br /><br />
+                                        &lt; 18.5: Underweight<br />
+                                        18.5-24.9: Normal<br />
+                                        25-29.9: Overweight<br />
+                                        30+: Obese
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                         <div style={{ fontSize: '2.5rem', fontWeight: 800 }}>{bmi}</div>
                         <div style={{ background: 'rgba(255,255,255,0.2)', padding: '4px 12px', borderRadius: '12px', display: 'inline-block', fontSize: '0.9rem' }}>
                             {category}
@@ -114,6 +149,35 @@ const Dashboard: React.FC = () => {
                     color="#F44336"
                     onClick={() => navigate('/track')}
                 />
+            </div>
+
+            {/* Quick Actions */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '80px' }}>
+                <div
+                    onClick={() => navigate('/history')}
+                    style={{ background: 'white', padding: '15px', borderRadius: '16px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', gap: '15px', cursor: 'pointer' }}
+                >
+                    <div style={{ background: '#e3f2fd', padding: '10px', borderRadius: '12px' }}>
+                        <Clock size={24} color="#2196F3" />
+                    </div>
+                    <div>
+                        <h3 style={{ margin: 0, fontSize: '1rem' }}>History</h3>
+                        <p style={{ margin: 0, fontSize: '0.8rem', color: '#666' }}>Past logs</p>
+                    </div>
+                </div>
+
+                <div
+                    onClick={() => navigate('/analytics')}
+                    style={{ background: 'white', padding: '15px', borderRadius: '16px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', gap: '15px', cursor: 'pointer' }}
+                >
+                    <div style={{ background: '#e8f5e9', padding: '10px', borderRadius: '12px' }}>
+                        <BarChart2 size={24} color="#4CAF50" />
+                    </div>
+                    <div>
+                        <h3 style={{ margin: 0, fontSize: '1rem' }}>Analytics</h3>
+                        <p style={{ margin: 0, fontSize: '0.8rem', color: '#666' }}>View trends</p>
+                    </div>
+                </div>
             </div>
 
         </div>

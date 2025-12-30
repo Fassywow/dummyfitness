@@ -8,6 +8,7 @@ import Tracker from './pages/Tracker';
 import Profile from './pages/Profile';
 import AskAI from './pages/AskAI';
 import History from './pages/History';
+import Analytics from './pages/Analytics';
 import { getCurrentUser } from './services/authService';
 import { getUserProfile } from './services/storageService';
 
@@ -104,6 +105,10 @@ function App() {
           <Route
             path="/history"
             element={isAuthenticated && hasProfile ? <History /> : <Navigate to={isAuthenticated ? "/onboarding" : "/login"} replace />}
+          />
+          <Route
+            path="/analytics"
+            element={isAuthenticated && hasProfile ? <Analytics /> : <Navigate to={isAuthenticated ? "/onboarding" : "/login"} replace />}
           />
         </Route>
       </Routes>
